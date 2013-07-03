@@ -171,7 +171,7 @@ public abstract class AbstractNativeProgram implements NativeProgram {
             if (workingDirectory == null || !workingDirectory.exists()) {
                 workingDirectory = outputDirectory;
             }
-            logger.info("Executing in '"+workingDirectory.getAbsolutePath()+"': " + StringUtils.join(arguments.iterator(), " "));
+            logger.debug("Executing in '"+workingDirectory.getAbsolutePath()+"': " + StringUtils.join(arguments.iterator(), " "));
 
             for( int i = 0; i <= environment.length - 1; i++)
             {

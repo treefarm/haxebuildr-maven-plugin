@@ -327,7 +327,6 @@ public class NativeBootstrap {
         }
 
         if (artifactsMap.get(HXCPP_KEY) != null) {
-            logger.info("initializing hxcpp");
             hxcpp.initialize(artifactsMap.get(HXCPP_KEY), outputDirectory, pluginHome, path);
         }
     }
