@@ -7,7 +7,7 @@
     <packaging>maven-plugin</packaging>
     <version>1.0.0-SNAPSHOT</version>
 
-    <name>Maven plugin to build Haxe projects</name>
+    <name>Plugin to build Haxe, OpenFL, and HXCPP projects</name>
 
     <developers>
         <developer>
@@ -148,9 +148,9 @@
     </dependencies>
 
     <scm>
-        <url>https://github.com/crayfellow/haxeibuildr-maven-plugin</url>
-        <developerConnection>scm:git:git@github.com:crayfellow/haxebuildr-maven-plugin.git</developerConnection>
-        <connection>scm:git:git@github.com:crayfellow/haxebuildr-maven-plugin.git</connection>
+        <url>https://github.com/treefarm/haxeibuildr-maven-plugin</url>
+        <developerConnection>scm:git:git@github.com:treefarm/haxebuildr-maven-plugin.git</developerConnection>
+        <connection>scm:git:git@github.com:treefarm/haxebuildr-maven-plugin.git</connection>
     </scm>
 
     <repositories>
