@@ -124,7 +124,7 @@ public class NativeBootstrap {
     public void clean(MavenProject project) throws Exception
     {
         Map<String, Plugin> pluginMap = project.getBuild().getPluginsAsMap();
-        Plugin plugin = pluginMap.get("io.treefarm.plugins:haxe-maven-plugin");
+        Plugin plugin = pluginMap.get("io.treefarm.plugins:haxebuildr-maven-plugin");
         File pluginHome = initializePluginHome(project, plugin);
         if (pluginHome.exists()) {
             logger.info("Deleting " + pluginHome.getAbsolutePath());
@@ -196,14 +196,14 @@ public class NativeBootstrap {
         if (artifactsMap.get(NEKO_KEY) == null)
         {
             throw new Exception(String.format(
-                    "Neko Runtime dependency (%s) not found in haxe-maven-plugin dependencies",
+                    "Neko Runtime dependency (%s) not found in haxebuildr-maven-plugin dependencies",
                     NEKO_KEY));
         }
 
         if (artifactsMap.get(HAXE_COMPILER_KEY) == null)
         {
             throw new Exception(String.format(
-                    "Haxe Compiler dependency (%s) not found in haxe-maven-plugin dependencies",
+                    "Haxe Compiler dependency (%s) not found in haxebuildr-maven-plugin dependencies",
                     HAXE_COMPILER_KEY));
         }
 

@@ -24,7 +24,7 @@ public class NekoLifecycleMapping extends AbstractHaxeLifecycleMapping implement
 {
     public String getCompiler()
     {
-        return "io.treefarm.plugins:haxe-maven-plugin:compileNeko";
+        return "io.treefarm.plugins:haxebuildr-maven-plugin:compileNeko";
     }
 
 }

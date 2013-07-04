@@ -24,7 +24,7 @@ public class HarLifecycleMapping extends AbstractHaxeLifecycleMapping implements
 {
     public String getCompiler()
     {
-        return "io.treefarm.plugins:haxe-maven-plugin:compileHar";
+        return "io.treefarm.plugins:haxebuildr-maven-plugin:compileHar";
     }
 
 }

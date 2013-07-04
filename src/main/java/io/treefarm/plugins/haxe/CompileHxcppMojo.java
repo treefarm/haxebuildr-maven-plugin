@@ -105,6 +105,7 @@ public class CompileHxcppMojo extends AbstractCompileMojo {
                         File source = new File(relocateFiles.get("source"));
                         File destination = new File(relocateFiles.get("destination"));
                         if (source.exists()) {
+                            getLog().info("Relocating '"+source.getAbsolutePath()+"' to '"+destination.getAbsolutePath()+"'");
                             source.renameTo(destination);
                         } else {
                             getLog().error("Hxcpp relocate cannot move '"+source.getAbsolutePath()+"' as it appears not to exist!");

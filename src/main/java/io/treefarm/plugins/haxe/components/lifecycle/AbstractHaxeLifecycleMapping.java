@@ -44,15 +44,15 @@ public abstract class AbstractHaxeLifecycleMapping
         lifecycle = new Lifecycle();
         lifecycle.setId( "default" );
         phases = new LinkedHashMap<String, String>();
-        phases.put( "doc", "io.treefarm.plugins:haxe-maven-plugin:doc" );
-        //phases.put( "clean", "io.treefarm.plugins:haxe-maven-plugin:clean" );
+        phases.put( "doc", "io.treefarm.plugins:haxebuildr-maven-plugin:doc" );
+        //phases.put( "clean", "io.treefarm.plugins:haxebuildr-maven-plugin:clean" );
         phases.put( "process-resources", "org.apache.maven.plugins:maven-resources-plugin:resources" );
-        phases.put( "purge-local-repository", "org.apache.maven.plugins:maven-dependency-plugin:purge-local-repository -Dexclude=io.treefarm.plugins:haxe-maven-plugin" );
+        phases.put( "purge-local-repository", "org.apache.maven.plugins:maven-dependency-plugin:purge-local-repository -Dexclude=io.treefarm.plugins:haxebuildr-maven-plugin" );
         phases.put( "resolve-dependencies", "org.apache.maven.plugins:maven-dependency-plugin:resolve" );
         phases.put( "compile", getCompiler() );
         phases.put( "process-test-resources", "org.apache.maven.plugins:maven-resources-plugin:testResources" );
-        phases.put( "test-compile", "io.treefarm.plugins:haxe-maven-plugin:testCompile");
-        phases.put( "test", "io.treefarm.plugins:haxe-maven-plugin:testRun" );
+        phases.put( "test-compile", "io.treefarm.plugins:haxebuildr-maven-plugin:testCompile");
+        phases.put( "test", "io.treefarm.plugins:haxebuildr-maven-plugin:testRun" );
 
         if ( getPackage() != null )
         {

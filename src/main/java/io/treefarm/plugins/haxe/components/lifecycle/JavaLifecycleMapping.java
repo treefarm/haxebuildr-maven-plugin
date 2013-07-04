@@ -24,7 +24,7 @@ public class JavaLifecycleMapping extends AbstractHaxeLifecycleMapping implement
 {
     public String getCompiler()
     {
-        return "io.treefarm.plugins:haxe-maven-plugin:compileJava";
+        return "io.treefarm.plugins:haxebuildr-maven-plugin:compileJava";
     }
 
 }
