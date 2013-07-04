@@ -113,7 +113,8 @@ public final class OpenFLCompiler {
                     xmlGenerated = true;
                 }
                 if (target != CompileTarget.ios) {
-                    execute("build", list);
+                    Boolean tolerateErrors = false;
+                    execute("build", list, tolerateErrors);
                 }
             } else {
                 throw new Exception("Encountered an unsupported target to pass to OpenFL: " + target);
@@ -172,10 +173,15 @@ public final class OpenFLCompiler {
 
     private void execute(String command, List<String> arguments) throws Exception
     {
+        execute(command, arguments, false);
+    }
+
+    private void execute(String command, List<String> arguments, Boolean tolerateErrors) throws Exception
+    {
         List<String> list = new ArrayList<String>();
         list.add(command);
         list.addAll(arguments);
-        int returnValue = openfl.execute(list, logger);
+        int returnValue = openfl.execute(list, logger, tolerateErrors);
 
         if (returnValue > 0) {
             throw new Exception("OpenFL compiler encountered an error and cannot proceed.");

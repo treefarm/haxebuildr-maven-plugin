@@ -40,6 +40,7 @@ import java.io.FileOutputStream;
 import java.util.EnumMap;
 import java.util.Set;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Builds a `har` package. This is a zip archive which
@@ -59,6 +60,9 @@ public class CompileHxcppMojo extends AbstractCompileMojo {
 
     @Parameter(required = false)
     protected List<String> compilerFlags;
+
+    @Parameter(required = false)
+    protected Map<String, String> relocateFiles;
 
     @Parameter(required = false)
     protected List<String> cacheFiles;
@@ -91,6 +95,21 @@ public class CompileHxcppMojo extends AbstractCompileMojo {
                 catch (Exception e)
                 {
                     throw new MojoFailureException("Hxcpp build failed ", e);
+                }
+
+                if (relocateFiles != null
+                        && relocateFiles.containsKey("source")
+                        && relocateFiles.containsKey("destination")) {
+                    try
+                    {
+                        File source = new File(relocateFiles.get("source"));
+                        File destination = new File(relocateFiles.get("destination"));
+                        source.renameTo(destination);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new MojoFailureException("Hxcpp relocate failed ", e);
+                    }
                 }
             } else {
                 throw new MojoFailureException("Hxcpp project file '"+projectFile.getName()+"' does not exist!");

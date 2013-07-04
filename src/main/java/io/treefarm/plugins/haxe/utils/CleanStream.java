@@ -91,6 +91,7 @@ private String myname = "stream";
                             if (line.matches("(.*)[Ww]arning(.*)")
                                     || !line.matches("(.*)[Ee]rror(.*)")) {
                                 log.warn(line);
+                                count--;
                             } else {
                                 log.error("("+myname+") " + line);
                             }

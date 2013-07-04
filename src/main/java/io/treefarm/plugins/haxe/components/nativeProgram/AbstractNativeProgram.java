@@ -129,6 +129,11 @@ public abstract class AbstractNativeProgram implements NativeProgram {
         return execute(arguments, null, outputLogger);
     }
 
+    public int execute(List<String> arguments, Logger outputLogger, boolean tolerateErrors) throws NativeProgramException
+    {
+        return execute(arguments, null, outputLogger, tolerateErrors);
+    }
+
     public int execute(List<String> arguments, File workingDirectory, Logger outputLogger) throws NativeProgramException
     {
         return execute(arguments, workingDirectory, outputLogger, false);
@@ -274,12 +279,14 @@ public abstract class AbstractNativeProgram implements NativeProgram {
             cleanOutput.start();
 
             int returnValue = process.waitFor();
+            int errorCount = cleanError.getCount();
 
             if (!tolerateErrors) {
-                int errorCount = cleanError.getCount();
                 if (returnValue == 0 && errorCount > 0) {
                     returnValue = errorCount;
                 }
+            } else {
+                logger.info(errorCount + " errors ignored.");
             }
 
             return returnValue;

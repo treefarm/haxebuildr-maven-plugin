@@ -82,7 +82,7 @@ public final class HxcppCompiler {
     {
         List<String> list = new ArrayList<String>();
         list.addAll(arguments);
-        int returnValue = hxcpp.execute(list, workingDirectory, logger);
+        int returnValue = hxcpp.execute(list, workingDirectory, logger, false); // tolerateErrors = false
 
         if (returnValue > 0) {
             throw new Exception("Hxcpp compiler encountered an error and cannot proceed.");
