@@ -136,16 +136,26 @@ public class HaxelibHelper {
             }
 
             unpackDir.setLastModified(artifactFile.lastModified());
+        }
 
-            try
-            {
-                haxelib.execute("set", artifactId, getCleanVersionForHaxelibArtifact(artifactVersion));
-            }
-            catch (NativeProgramException e)
-            {
-                logger.error("Unable to set version for haxelib '"+artifactId+"'.", e);
-                return 1;
-            }
+        int returnValue = 0;
+
+        // set to specified version
+        returnValue = setVersionFor(artifactId, artifactVersion, logger);
+        
+        return returnValue;
+    }
+
+    public static int setVersionFor(String artifactId, String artifactVersion, Logger logger)
+    {
+        try
+        {
+            haxelib.execute("set", artifactId, getCleanVersionForHaxelibArtifact(artifactVersion));
+        }
+        catch (NativeProgramException e)
+        {
+            logger.error("Unable to set version for haxelib '"+artifactId+"'.", e);
+            return 1;
         }
         return 0;
     }
