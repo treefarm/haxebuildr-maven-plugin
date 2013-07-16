@@ -110,6 +110,9 @@ public final class MUnitCompiler {
         list.add("-coverage");
         list.add("-result-exit-code");
         list.add("-norun");
+        if (debug) {
+            list.add("-debug");
+        }
         if (additionalArguments != null) {
             list.addAll(additionalArguments);
         }
@@ -132,6 +135,9 @@ public final class MUnitCompiler {
         if (testBrowser != null) {
             list.add("-browser");
             list.add(testBrowser);
+        }
+        if (debug) {
+            list.add("-debug");
         } 
         runWithArguments("run", list);
     }

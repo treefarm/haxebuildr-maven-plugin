@@ -71,6 +71,12 @@ public class TestCompileMojo extends AbstractCompileMojo {
     private String testMain;
 
     /**
+     * Test in debug mode
+     */
+    @Parameter
+    protected boolean testDebug;
+
+    /**
      * Test source class path
      */
     @Parameter
@@ -116,6 +122,9 @@ public class TestCompileMojo extends AbstractCompileMojo {
             if (openflIsActive() && testTargets != null && testClasspath != null) {
                 String logInfo = "Compiling tests for MassiveUnit using OpenFL ";
                 logInfo += (testCoverage ? "WITH code coverage" : "WITHOUT code coverage") + ".";
+                if (testDebug) {
+                    logInfo += "\n *** with debug, so only tests with @TestDebug will be built ***";
+                }
                 getLog().info(logInfo);
 
                 Set<String> classPaths = new HashSet<String>();
@@ -210,7 +219,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
                         hxmlFile.getAbsolutePath(),
                         testResources,
                         testTemplates);
-                    openflCompiler.initialize(debug, verbose);
+                    openflCompiler.initialize(debug, verbose, false, testDebug);
                     openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true);
                 }
                 catch (Exception e)
@@ -222,6 +231,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
 
                 try
                 {
+                    munitCompiler.initialize(testDebug, false);
                     munitCompiler.setOutputDirectory(outputDirectory);
                     munitCompiler.compile(project, null);
                 }

@@ -40,6 +40,12 @@ public final class TestRunMojo extends AbstractHaxeMojo {
     @Component
     private MUnitCompiler munitCompiler;
 
+    /**
+     * Test in debug mode
+     */
+    @Parameter
+    protected boolean testDebug;
+
     @Parameter
     private String testBrowser;
 
@@ -62,10 +68,14 @@ public final class TestRunMojo extends AbstractHaxeMojo {
             if (testDisplay != null) {
                 outputInfo += "\n on display '"+testDisplay+"'";
             }
+            if (testDebug) {
+                outputInfo += "\n *** with debug, so only tests with @TestDebug will be run ***";
+            }
             getLog().info(outputInfo);
 
             try
             {
+                munitCompiler.initialize(testDebug, false);
                 munitCompiler.setOutputDirectory(outputDirectory);
                 munitCompiler.run(project, testBrowser, testKillBrowser, testDisplay);
             }

@@ -51,6 +51,7 @@ public final class OpenFLCompiler {
     private Logger logger;
 
     private boolean debug = false;
+    private boolean testDebug = false;
     private boolean verbose = false;
     private boolean generateDoc = false;
 
@@ -66,6 +67,14 @@ public final class OpenFLCompiler {
         this.debug = debug;
         this.verbose = verbose;
         this.generateDoc = generateDoc;
+    }
+
+    public void initialize(boolean debug, boolean verbose, boolean generateDoc, boolean testDebug)
+    {
+        this.debug = debug;
+        this.verbose = verbose;
+        this.generateDoc = generateDoc;
+        this.testDebug = testDebug;
     }
 
     public void compile(MavenProject project, Set<CompileTarget> targets, String nmml) throws Exception
@@ -111,6 +120,9 @@ public final class OpenFLCompiler {
                 if (chxdocIsValid && !xmlGenerated) {
                     list.add("--haxeflag='-xml " + this.outputDirectory.getAbsolutePath() + "/" + TYPES_FILE + "'");
                     xmlGenerated = true;
+                }
+                if (testDebug) {
+                    list.add("--haxeflag='-D testDebug'");
                 }
                 if (target != CompileTarget.ios) {
                     Boolean tolerateErrors = false;
