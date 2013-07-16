@@ -112,7 +112,7 @@ public class CompileHarMojo extends AbstractCompileMojo {
         if (!outputBase.exists()) outputBase.mkdirs();
 
         if (openflIsActive()) {
-            openflCompiler.initialize(debug, verbose);
+            openflCompiler.initialize(debug, verbose, log);
             openflCompiler.compile(project, targets, nmml, compilerFlags, null, null, true);
         } else {
             EnumMap<CompileTarget, String> compileTargets = new EnumMap<CompileTarget, String>(CompileTarget.class);

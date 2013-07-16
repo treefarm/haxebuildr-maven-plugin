@@ -52,28 +52,30 @@ public final class OpenFLCompiler {
 
     private boolean debug = false;
     private boolean testDebug = false;
+    private boolean testRunner = false;
+    private boolean log = false;
     private boolean verbose = false;
     private boolean generateDoc = false;
 
     private File outputDirectory;
 
-    public void initialize(boolean debug, boolean verbose)
+    public void initialize(boolean debug, boolean verbose, boolean log)
     {
-        initialize(debug, verbose, false);
+        initialize(debug, verbose, log, false);
     }
 
-    public void initialize(boolean debug, boolean verbose, boolean generateDoc)
+    public void initialize(boolean debug, boolean verbose, boolean log, boolean generateDoc)
     {
         this.debug = debug;
         this.verbose = verbose;
+        this.log = log;
         this.generateDoc = generateDoc;
     }
 
-    public void initialize(boolean debug, boolean verbose, boolean generateDoc, boolean testDebug)
+    public void initialize(boolean debug, boolean verbose, boolean log, boolean generateDoc, boolean testRunner, boolean testDebug)
     {
-        this.debug = debug;
-        this.verbose = verbose;
-        this.generateDoc = generateDoc;
+        initialize(debug, verbose, log, generateDoc);
+        this.testRunner = testRunner;
         this.testDebug = testDebug;
     }
 
@@ -114,12 +116,20 @@ public final class OpenFLCompiler {
                 logger.info("Building using '" + nmmlFile.getName() + "' for target '"+targetString+"'.");
 
                 list = getStandardArgumentsList(nmml, targetString, buildDir, appMain, appFile, additionalArguments);
+                
+                if (!testRunner && target == CompileTarget.flash) {
+                    list.add("-web");
+                }
+
                 if (update || target == CompileTarget.ios) {
                     execute("update", list);
                 }
                 if (chxdocIsValid && !xmlGenerated) {
                     list.add("--haxeflag='-xml " + this.outputDirectory.getAbsolutePath() + "/" + TYPES_FILE + "'");
                     xmlGenerated = true;
+                }
+                if (log) {
+                    list.add("--haxeflag='-D log'");
                 }
                 if (testDebug) {
                     list.add("--haxeflag='-D testDebug'");

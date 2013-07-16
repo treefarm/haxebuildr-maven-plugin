@@ -219,7 +219,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
                         hxmlFile.getAbsolutePath(),
                         testResources,
                         testTemplates);
-                    openflCompiler.initialize(debug, verbose, false, testDebug);
+                    openflCompiler.initialize(debug, verbose, false, false, true, testDebug);
                     openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true);
                 }
                 catch (Exception e)
