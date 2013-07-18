@@ -50,8 +50,8 @@ public final class HxcppNativeProgram extends AbstractNativeProgram {
     {
 		super.initialize(artifact, outputDirectory, pluginHome, path);
 
-        path.add("/bin");
-        path.add("/usr/bin");
+        //path.add("/bin");
+        //path.add("/usr/bin");
 
 		try
         {

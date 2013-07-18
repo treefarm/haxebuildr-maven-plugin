@@ -87,7 +87,6 @@ public final class MUnitNativeProgram extends AbstractNativeProgram {
     {
     	String haxeHome = haxe.getInstalledPath();
     	String nekoHome = neko.getInstalledPath();
-    	String openflHome = getInstalledPath();
         String[] env = new String[]{
                 "HAXEPATH=" + haxeHome,
                 "NEKOPATH=" + nekoHome,
@@ -95,8 +94,12 @@ public final class MUnitNativeProgram extends AbstractNativeProgram {
                 "LD_LIBRARY_PATH=" + nekoHome + ":.",
                 "HAXE_LIBRARY_PATH=" + haxeHome + "/std:.",
                 "HAXE_STD_PATH=" + haxeHome + "/std:.",
-                "OPENFLPATH=" + openflHome
+                "PATH=" + StringUtils.join(path.iterator(), ":") + ":/usr/bin",
+                "HOME=" + pluginHome.getAbsolutePath()
         };
-        return ArrayUtils.addAll(super.getEnvironment(), env);
+        if (this.display != null) {
+            env = ArrayUtils.add(env, "DISPLAY=" + this.display);
+        }
+        return env;
     }
 }
