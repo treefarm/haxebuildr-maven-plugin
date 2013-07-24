@@ -101,7 +101,7 @@ public final class HxcppNativeProgram extends AbstractNativeProgram {
                 "LD_LIBRARY_PATH=" + nekoHome + ":.",
                 "HAXE_LIBRARY_PATH=" + haxeHome + "/std:.",
                 "HAXE_STD_PATH=" + haxeHome + "/std:.",
-                "PATH=" + StringUtils.join(path.iterator(), ":"),
+                "PATH=" + StringUtils.join(path.iterator(), ":") + ":/usr/bin:/bin",
                 "HOME=" + pluginHome.getAbsolutePath()
         };
 

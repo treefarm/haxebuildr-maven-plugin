@@ -131,7 +131,7 @@ public final class OpenFLNativeProgram extends AbstractNativeProgram {
                 "HAXE_LIBRARY_PATH=" + haxeHome + "/std:.",
                 "HAXE_STD_PATH=" + haxeHome + "/std:.",
                 "OPENFLPATH=" + openflHome,
-                "PATH=" + StringUtils.join(path.iterator(), ":"),
+                "PATH=" + StringUtils.join(path.iterator(), ":") + ":/usr/bin:/bin",
                 /*"OPENFL_LOAD_DEBUG=1",*/
                 "HOME=" + pluginHome.getAbsolutePath()
         };
