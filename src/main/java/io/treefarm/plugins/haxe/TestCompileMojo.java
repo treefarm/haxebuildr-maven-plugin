@@ -91,7 +91,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
     @Parameter
     private String testTemplates;
 
-    @Parameter(required = false)
+    @Parameter(required = true)
     protected Set<CompileTarget> testTargets;
 
     @Parameter
@@ -119,7 +119,9 @@ public class TestCompileMojo extends AbstractCompileMojo {
 
         if (munitCompiler.getHasRequirements()) {
 
-            if (openflIsActive() && testTargets != null && testClasspath != null) {
+            if (openflIsActive() 
+                    && testTargets != null 
+                    && testClasspath != null) {
                 String logInfo = "Compiling tests for MassiveUnit using OpenFL ";
                 logInfo += (testCoverage ? "WITH code coverage" : "WITHOUT code coverage") + ".";
                 if (testDebug) {
@@ -220,7 +222,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
                         testResources,
                         testTemplates);
                     openflCompiler.initialize(debug, verbose, false, false, true, testDebug);
-                    openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true);
+                    openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true, false);
                 }
                 catch (Exception e)
                 {

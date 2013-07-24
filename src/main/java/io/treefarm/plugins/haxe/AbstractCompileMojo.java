@@ -66,6 +66,12 @@ public abstract class AbstractCompileMojo extends AbstractHaxeMojo {
     protected boolean log;
 
     /**
+     * Run following build
+     */
+    @Parameter
+    protected boolean run;
+
+    /**
      * Compile with verbose output
      */
     @Parameter

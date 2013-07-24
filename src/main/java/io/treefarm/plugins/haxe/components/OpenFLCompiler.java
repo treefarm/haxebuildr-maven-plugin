@@ -92,11 +92,11 @@ public final class OpenFLCompiler {
     public void compile(MavenProject project, Set<CompileTarget> targets, String nmml, List<String> additionalArguments,
         String appMain, String appFile) throws Exception
     {
-        compile(project, targets, nmml, additionalArguments, null, null, false);
+        compile(project, targets, nmml, additionalArguments, null, null, false, false);
     }
 
     public void compile(MavenProject project, Set<CompileTarget> targets, String nmml, List<String> additionalArguments,
-        String appMain, String appFile, boolean update) throws Exception
+        String appMain, String appFile, boolean update, boolean run) throws Exception
     {
         File nmmlFile = assertNMML(nmml);
         String targetString = null;
@@ -104,6 +104,7 @@ public final class OpenFLCompiler {
         boolean chxdocIsValid = false;
         boolean xmlGenerated = false;
         String buildDir = this.outputDirectory.getAbsolutePath();
+        Boolean tolerateErrors = false;
 
         if (generateDoc) {
             chxdocIsValid = chxdoc != null && chxdoc.getInitialized();
@@ -122,7 +123,7 @@ public final class OpenFLCompiler {
                 }
 
                 if (update || target == CompileTarget.ios) {
-                    execute("update", list);
+                    execute("update", list, tolerateErrors);
                 }
                 if (chxdocIsValid && !xmlGenerated) {
                     list.add("--haxeflag='-xml " + this.outputDirectory.getAbsolutePath() + "/" + TYPES_FILE + "'");
@@ -135,8 +136,10 @@ public final class OpenFLCompiler {
                     list.add("--haxeflag='-D testDebug'");
                 }
                 if (target != CompileTarget.ios) {
-                    Boolean tolerateErrors = false;
                     execute("build", list, tolerateErrors);
+                    if (run) {
+                        execute("run", list, tolerateErrors);
+                    }
                 }
             } else {
                 throw new Exception("Encountered an unsupported target to pass to OpenFL: " + target);
