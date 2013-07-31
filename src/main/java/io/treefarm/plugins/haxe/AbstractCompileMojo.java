@@ -72,6 +72,12 @@ public abstract class AbstractCompileMojo extends AbstractHaxeMojo {
     protected boolean run;
 
     /**
+     * Generate default web templates (where appropriate)
+     */
+    @Parameter
+    protected boolean web;
+
+    /**
      * Compile with verbose output
      */
     @Parameter

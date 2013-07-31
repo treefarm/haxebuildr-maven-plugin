@@ -152,7 +152,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
                     compilerFlags.add("-lib mcover");
                     compilerFlags.add("-D MCOVER");
 
-                    String mCoverDirective = "--macro mcover.MCover.coverage\\([\\'\\'],[\\'";
+                    /*String mCoverDirective = "--macro mcover.MCover.coverage\\([\\'\\'],[\\'";
                     //String mCoverDirective = "--macro mcover.MCover.coverage([''],['";
                     Iterator<String> it = classPaths.iterator();
                     String classPath;
@@ -167,9 +167,10 @@ public class TestCompileMojo extends AbstractCompileMojo {
                         }
                     }
 
-                    mCoverDirective += cleanClassPathList + "\\'],[\\'\\']\\)";
+                    mCoverDirective += cleanClassPathList + "\\']\\)";
                     //mCoverDirective += cleanClassPathList + "'],[''])";
                     compilerFlags.add(mCoverDirective);
+                    getLog().info("mcover call: " + mCoverDirective);*/
                 }
                 compilerFlags.add("-cp " + testClasspath);
 
@@ -222,7 +223,7 @@ public class TestCompileMojo extends AbstractCompileMojo {
                         testResources,
                         testTemplates);
                     openflCompiler.initialize(debug, verbose, false, false, true, testDebug);
-                    openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true, false);
+                    openflCompiler.compile(project, testTargets, nmml, compilerFlags, testMain, testRunner, true, false, false);
                 }
                 catch (Exception e)
                 {

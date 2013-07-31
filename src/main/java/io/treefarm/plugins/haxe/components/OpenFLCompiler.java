@@ -92,11 +92,11 @@ public final class OpenFLCompiler {
     public void compile(MavenProject project, Set<CompileTarget> targets, String nmml, List<String> additionalArguments,
         String appMain, String appFile) throws Exception
     {
-        compile(project, targets, nmml, additionalArguments, null, null, false, false);
+        compile(project, targets, nmml, additionalArguments, null, null, false, false, false);
     }
 
     public void compile(MavenProject project, Set<CompileTarget> targets, String nmml, List<String> additionalArguments,
-        String appMain, String appFile, boolean update, boolean run) throws Exception
+        String appMain, String appFile, boolean update, boolean run, boolean web) throws Exception
     {
         File nmmlFile = assertNMML(nmml);
         String targetString = null;
@@ -118,7 +118,7 @@ public final class OpenFLCompiler {
 
                 list = getStandardArgumentsList(nmml, targetString, buildDir, appMain, appFile, additionalArguments);
                 
-                if (!testRunner && target == CompileTarget.flash) {
+                if (web && !testRunner && target == CompileTarget.flash) {
                     list.add("-web");
                 }
 
@@ -136,6 +136,9 @@ public final class OpenFLCompiler {
                     list.add("--haxeflag='-D testDebug'");
                 }
                 if (target != CompileTarget.ios) {
+                    /*if (!debug && target == CompileTarget.html5) {
+                        list.add("-minify");
+                    }*/
                     execute("build", list, tolerateErrors);
                     if (run) {
                         execute("run", list, tolerateErrors);
